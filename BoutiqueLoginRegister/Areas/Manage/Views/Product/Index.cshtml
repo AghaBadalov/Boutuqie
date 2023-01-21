@@ -1,0 +1,47 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 0;
+}
+
+
+<div class="container" style="display:flex; justify-content:space-between; align-items:center; margin-left:10px">
+    <h1>Product index</h1>
+    <a asp-action="create" asp-controller="product" class="btn btn-success">Create a product</a>
+</div>
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product product in Model)
+            {
+                counter++;
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Category.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Description</td>
+                    <td><img style="width: 100px; height: 100px" src="~/uploads/products/@product.ImageName" /></td>
+                    <td>
+                        <a asp-action="update" asp-controller="product" asp-route-id="@product.Id" class="btn btn-info">Update</a>
+                        <a asp-action="delete" asp-controller="product" asp-route-id="@product.Id" class="btn btn-danger delete-button">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
